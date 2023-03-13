@@ -1,0 +1,46 @@
+
+__Start test__
+Current URL: https://piter-online.net/
+Указываем улицу
+Нажимаем Enter
+Указываем дом
+Нажимаем на выпадающий список тип подключения
+Нажимаем на тип подключения: в квартиру
+Нажимаем показать тарифы
+Current URL: https://piter-online.net/leningradskaya-oblast/orders/sat
+
+__Sending application №1__
+Заявка на подключение интернета на дачу
+Вводим имя
+Вводим номер телефона
+Нажимаем "Подключиться"
+Статус код заявки:  https://piter-online.net/api/orders?type=site101-order-sat 201
+
+__Sending application №2__
+Заявка на подключение интернета на дачу
+Вводим имя
+Вводим номер телефона
+Нажимаем "Подключиться"
+Статус код заявки:  https://piter-online.net/api/orders?type=site101-order-sat 201
+
+__Sending application №3__
+Заявка на подключение интернета на дачу
+Вводим имя
+Вводим номер телефона
+Нажимаем "Подключиться"
+Статус код заявки:  https://piter-online.net/api/orders?type=site101-order-sat 201
+
+__Sending application №4__
+Заявка на подключение интернета на дачу
+Вводим имя
+Вводим номер телефона
+Нажимаем "Подключиться"
+Статус код заявки:  https://piter-online.net/api/orders?type=site101-order-sat 201
+
+__Sending application №5__
+Заявка на подключение интернета на дачу
+Вводим имя
+Вводим номер телефона
+Нажимаем "Подключиться"
+Статус код заявки:  https://piter-online.net/api/orders?type=site101-order-sat 201
+__Finish test__
