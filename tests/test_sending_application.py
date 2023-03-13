@@ -27,7 +27,7 @@ def test_connect_tariff(set_up, data):
     number_phone = data['number_phone']
 
     mp = MainPage(driver)
-    mp.filling_out_the_form(street, house_numbers)
+    mp.filling_out_the_form(street, house_numbers)  # Выбираем рандомный тип подключения
 
     dp = DachaPage(driver)
     bp = BusinessPage(driver)

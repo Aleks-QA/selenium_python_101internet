@@ -43,7 +43,7 @@ class MainPage(Base):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.DROPDOWN_TYPE_CONNECT)))
 
-    def get_dropdown_random_type_connect_apartment(self):
+    def get_dropdown_random_type_connect(self):
         return WebDriverWait(self.driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, self.DROPDOWN_RANDOM_TYPE_CONNECT)))
 
@@ -70,8 +70,8 @@ class MainPage(Base):
     def click_dropdown_type_connect(self):
         self.get_dropdown_type_connect().click()
 
-    def click_dropdown_type_connect_apartment(self):
-        self.get_dropdown_random_type_connect_apartment().click()
+    def click_dropdown_random_type_connect(self):
+        self.get_dropdown_random_type_connect().click()
 
     def click_dropdown_type_connect_office(self):
         self.get_dropdown_type_connect_office().click()
@@ -99,8 +99,8 @@ class MainPage(Base):
             self.input_house_numbers(house_numbers)
             print('Нажимаем на выпадающий список тип подключения')
             self.click_dropdown_type_connect()
-            print('Нажимаем на тип подключения: в квартиру')
-            self.click_dropdown_type_connect_apartment()
+            print('Выбираем рандомный тип подключения')
+            self.click_dropdown_random_type_connect()
             time.sleep(1)
             print('Нажимаем показать тарифы')
             self.click_button_show_tariff()
