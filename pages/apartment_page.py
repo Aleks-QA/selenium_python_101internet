@@ -16,7 +16,6 @@ class ApartmentPage(Base):
 
     # LOCATORS
 
-    """Интернет по адресу(в квартиру)"""
     BUTTON_CLOSE_INFO_WINDOW_APARTMENT = '//div[@datatest="close_popup1_from_quiz_input_tel"]/span'
     BUTTON_RANDOM_CONNECT_TARIFF_APARTMENT = f'//div[@data-test="countRates"]/div/div/div/div[{randint(1, 22)}]//a[contains(text(),"Подключить")]'
 
