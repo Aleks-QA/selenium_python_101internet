@@ -6,11 +6,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class BusinessPage(Base):
-    """Офис"""
-    # url = 'https://piter-online.net/leningradskaya-oblast/'
+    """Подключение интернета в офис"""
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -51,18 +51,17 @@ class BusinessPage(Base):
 
     def send_application_business(self, name, number_phone):
         """Заявка: Подключение интернета в офис"""
-        # self.get_current_url()
-        # self.driver.get(url)
-        print('Вводим имя')
-        self.input_contact_person(name)
-        print('Вводим номер телефона')
-        self.input_number_phone(number_phone)
-        # time.
-        print('Нажимаем "Отправить заявку"')
-        self.click_button_send_request()
+        with allure.step('Send_application_business'):
+            Logger.add_start_step(method='send_application_business')
+            print('Вводим имя')
+            self.input_contact_person(name)
+            print('Вводим номер телефона')
+            self.input_number_phone(number_phone)
+            print('Нажимаем "Отправить заявку"')
+            self.click_button_send_request()
 
-        request = self.driver.wait_for_request('/api/orders', 30)
-        status_code = request.response.status_code
-        print("Статус код заявки: ", request, request.response.status_code)
-
-        return status_code
+            request = self.driver.wait_for_request('/api/orders', 30)
+            status_code = request.response.status_code
+            print("Статус код заявки: ", request, request.response.status_code)
+            Logger.add_end_step(self.driver.current_url, method='send_application_business')
+            return status_code

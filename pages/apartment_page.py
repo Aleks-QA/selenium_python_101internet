@@ -1,7 +1,6 @@
-import time
 from random import randint
 import allure
-from selenium.webdriver import Keys
+from utilities.logger import Logger
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -9,8 +8,7 @@ from base.base_class import Base
 
 
 class ApartmentPage(Base):
-    """Квартира"""
-    # url = 'https://piter-online.net/leningradskaya-oblast/'
+    """Подключение интернета в квартиру"""
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -21,8 +19,6 @@ class ApartmentPage(Base):
     """Интернет по адресу(в квартиру)"""
     BUTTON_CLOSE_INFO_WINDOW_APARTMENT = '//div[@datatest="close_popup1_from_quiz_input_tel"]/span'
     BUTTON_RANDOM_CONNECT_TARIFF_APARTMENT = f'//div[@data-test="countRates"]/div/div/div/div[{randint(1, 22)}]//a[contains(text(),"Подключить")]'
-
-    # BUTTON_CONNECT_TARIFF = '//div[@data-test="countRates"]/div/div/div/div[порядковый номер]//a[contains(text(),"Подключить")]'
 
     # GETTERS
 
@@ -46,6 +42,9 @@ class ApartmentPage(Base):
 
     def tariff_selection_apartment(self):
         """Выбор тарифа по заданному адресу(apartment)"""
-        self.get_current_url()
-        print('Нажимаем на подключение тарифа')
-        self.click_button_connect_tariff_apartment()
+        with allure.step('Tariff_selection_apartment'):
+            Logger.add_start_step(method='tariff_selection_apartment')
+            url = self.get_current_url()
+            print('Нажимаем на подключение тарифа')
+            self.click_button_connect_tariff_apartment()
+            Logger.add_end_step(url, method='tariff_selection_apartment')

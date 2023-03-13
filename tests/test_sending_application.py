@@ -1,11 +1,8 @@
 import allure
-import pytest
-import contextlib
 from seleniumwire import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
-
 from pages.apartment_page import ApartmentPage
 from pages.business_page import BusinessPage
 from pages.orders_page import OrderPage
@@ -14,8 +11,8 @@ from pages.main_page import MainPage
 from base.base_class import Base
 
 
-# @allure.description("Test connect tariff")
-def test_connect_tariff():
+@allure.description("Test sending application")
+def test_connect_tariff(set_up, data):
     """Поиск и отправка заявки"""
     options = Options()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])  # от лишних сообщений в терминале
@@ -24,10 +21,10 @@ def test_connect_tariff():
     driver.maximize_window()
     base = Base(driver)
 
-    street = 'Тестовая линия'
-    house_numbers = '1'
-    name = 'Александр'
-    number_phone = '1111111111'
+    street = data['street']
+    house_numbers = data['house_numbers']
+    name = data['name']
+    number_phone = data['number_phone']
 
     mp = MainPage(driver)
     mp.filling_out_the_form(street, house_numbers)
@@ -52,7 +49,7 @@ def test_connect_tariff():
     i = 0
     while i < 5:
         i += 1
-        print(f"__Sending application №{i}__")
+        print(f"\n__Sending application №{i}__")
         driver.get(get_url)
         if rez == 0:
             print("Заявка на подключение интернета в квартиру")

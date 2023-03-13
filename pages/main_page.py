@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class MainPage(Base):
@@ -85,22 +86,22 @@ class MainPage(Base):
 
     def filling_out_the_form(self, street, house_numbers):
         """Заполнение формы поиска"""
-        self.driver.get(self.url)
-        self.get_current_url()
-        print('Указываем улицу')
-        self.input_street(street)
-        time.sleep(2)
-
-        print('Нажимаем Enter')
-        self.get_input_street().send_keys(Keys.RETURN)
-
-        print('Указываем дом')
-        self.input_house_numbers(house_numbers)
-        # self.get_dropdown_type_connect()  # F
-        print('Нажимаем на выпадающий список тип подключения')
-        self.click_dropdown_type_connect()
-        print('Нажимаем на тип подключения: в квартиру')
-        self.click_dropdown_type_connect_apartment()
-        time.sleep(1)
-        print('Нажимаем показать тарифы')
-        self.click_button_show_tariff()
+        with allure.step('Filling_out_the_form'):
+            Logger.add_start_step(method='filling_out_the_form')
+            self.driver.get(self.url)
+            self.get_current_url()
+            print('Указываем улицу')
+            self.input_street(street)
+            time.sleep(2)
+            print('Нажимаем Enter')
+            self.get_input_street().send_keys(Keys.RETURN)
+            print('Указываем дом')
+            self.input_house_numbers(house_numbers)
+            print('Нажимаем на выпадающий список тип подключения')
+            self.click_dropdown_type_connect()
+            print('Нажимаем на тип подключения: в квартиру')
+            self.click_dropdown_type_connect_apartment()
+            time.sleep(1)
+            print('Нажимаем показать тарифы')
+            self.click_button_show_tariff()
+            Logger.add_end_step(self.driver.current_url, method='filling_out_the_form')
