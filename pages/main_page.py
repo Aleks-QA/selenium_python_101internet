@@ -9,6 +9,7 @@ from base.base_class import Base
 from utilities.logger import Logger
 
 
+
 class MainPage(Base):
     url = 'https://piter-online.net/'
 
