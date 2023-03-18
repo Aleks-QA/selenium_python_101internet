@@ -1,3 +1,5 @@
+import time
+
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -54,6 +56,7 @@ class BusinessPage(Base):
             self.input_contact_person(name)
             print('Вводим номер телефона')
             self.input_number_phone(number_phone)
+            time.sleep(1)
             print('Нажимаем "Отправить заявку"')
             self.click_button_send_request()
 

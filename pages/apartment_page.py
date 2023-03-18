@@ -23,7 +23,7 @@ class ApartmentPage(Base):
 
     def get_button_close_info_window_apartment(self):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.BUTTON_CLOSE_INFO_WINDOW_APARTMENT)))
+            EC.visibility_of_element_located((By.XPATH, self.BUTTON_CLOSE_INFO_WINDOW_APARTMENT)))
 
     def get_button_connect_tariff_apartment(self):
         return WebDriverWait(self.driver, 30).until(
@@ -43,6 +43,7 @@ class ApartmentPage(Base):
         """Выбор тарифа по заданному адресу(apartment)"""
         with allure.step('Tariff_selection_apartment'):
             Logger.add_start_step(method='tariff_selection_apartment')
+            self.click_button_close_info_window_apartment()
             url = self.get_current_url()
             print('Нажимаем на подключение тарифа')
             self.click_button_connect_tariff_apartment()

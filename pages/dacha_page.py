@@ -1,3 +1,5 @@
+import time
+
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -54,6 +56,8 @@ class DachaPage(Base):
             self.input_name_dacha(name)
             print('Вводим номер телефона')
             self.input_number_phone_dacha(number_phone)
+            time.sleep(1)
+
             print('Нажимаем "Подключиться"')
             self.click_button_connect_dacha()
 
