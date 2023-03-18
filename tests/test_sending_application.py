@@ -30,7 +30,7 @@ def test_connect_tariff_apartment(driver, set_up, data):
 
 @allure.description("Test sending application - office")
 def test_connect_tariff_office(driver, set_up, data):
-    """Поиск и отправка заявки  на подключение в офис"""
+    """Поиск и отправка заявки на подключение в офис"""
     base = Base(driver)
 
     street = data['street']
