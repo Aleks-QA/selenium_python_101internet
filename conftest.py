@@ -10,7 +10,8 @@ from selenium.webdriver.chrome.options import Options
 def driver():
     # driver = webdriver.Chrome(executable_path="./chromedriver")
     options = Options()
-    options.add_experimental_option('excludeSwitches', ['enable-logging'])  # От лишних сообщений в терминале
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    options.add_argument('--headless')
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), chrome_options=options)
     driver.maximize_window()
     yield driver

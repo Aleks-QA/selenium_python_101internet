@@ -1,73 +1,31 @@
 import time
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from base.base_class import Base
-from utilities.logger import Logger
 
 
 class OrderPage(Base):
     """Оформление заявки(в квартиру)"""
 
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
-
     # LOCATORS
 
-    INPUT_NAME = '//input[@datatest="providers_provider_order_input_name"]'
-    INPUT_NUMBER_PHONE = '//input[@datatest="providers_provider_order_input_tel"]'
-    BUTTON_SUBMIT_YOUR_APPLICATION = '//div[@data-test="order_form_input_connect_button"]'
-    TEXT_STATUS = '//form/div/div[1]/div[1]'
-
-    # GETTERS
-
-    def get_input_name(self):
-        return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.INPUT_NAME)))
-
-    def get_input_number_phone(self):
-        return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.INPUT_NUMBER_PHONE)))
-
-    def get_button_submit_application(self):
-        return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, self.BUTTON_SUBMIT_YOUR_APPLICATION)))
-
-    def assert_text_status(self):
-        return WebDriverWait(self.driver, 30).until(
-            EC.text_to_be_present_in_element((By.XPATH, self.TEXT_STATUS),
-                                             'Ваша заявка на подключение принята в работу.'))
-
-    # ACTIONS
-
-    def input_name(self, name):
-        self.get_input_name().send_keys(name)
-
-    def input_number_phone(self, number_phone):
-        self.get_input_number_phone().send_keys(number_phone)
-
-    def click_button_submit_application(self):
-        self.move_to_element(self.get_button_submit_application())
-        self.get_button_submit_application().click()
+    INPUT_NAME = (By.XPATH, '//input[@datatest="providers_provider_order_input_name"]')
+    INPUT_NUMBER_PHONE = (By.XPATH, '//input[@datatest="providers_provider_order_input_tel"]')
+    BUTTON_SUBMIT_YOUR_APPLICATION = (By.XPATH, '//div[@data-test="order_form_input_connect_button"]')
+    TEXT_STATUS = (By.XPATH, '//form/div/div[1]/div[1]')
 
     # METHODS
 
     def send_application_apartment(self, name, number_phone):
         """Заявка: Подключение интернета в квартиру"""
         with allure.step('Send_application_apartment'):
-            Logger.add_start_step(method='send_application_apartment')
-            print('Вводим имя')
-            self.input_name(name)
-            print("Вводим номер телефона")
-            self.input_number_phone(number_phone)
+            self.element_is_clickable(self.INPUT_NAME).send_keys(name)
+            self.element_is_clickable(self.INPUT_NUMBER_PHONE).send_keys(number_phone)
             time.sleep(1)
-            print("Нажимаем кнопку 'Оставить заявку'")
-            self.click_button_submit_application()
+            self.element_is_clickable(self.BUTTON_SUBMIT_YOUR_APPLICATION).click()
+            # self.text_present_in_element(self.TEXT_STATUS, 'Ваша заявка на подключение принята в работу.')
 
             request = self.driver.wait_for_request('/api/orders', 30)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)
-            Logger.add_end_step(self.driver.current_url, method='send_application_apartment')
             return status_code

@@ -10,20 +10,22 @@ from base.base_class import Base
 @allure.description("Test sending application - apartment")
 def test_connect_tariff_apartment(driver, set_up, data):
     """Поиск и отправка заявки на подключение в квартиру"""
-    base = Base(driver)
+    url = 'https://piter-online.net/'
+    base = Base(driver, url)
+    base.open()
 
     street = data['street']
     house_numbers = data['house_numbers']
     name = data['name']
     number_phone = data['number_phone']
 
-    mp = MainPage(driver)
+    mp = MainPage(driver, url)
     mp.filling_out_the_form_apartment(street, house_numbers)
 
-    ap = ApartmentPage(driver)
-    op = OrderPage(driver)
+    ap = ApartmentPage(driver, url)
+    op = OrderPage(driver, url)
     print("Заявка на подключение интернета в квартиру")
-    ap.tariff_selection_apartment()
+    ap.selection_tariff_apartment()
     status_code = op.send_application_apartment(name, number_phone)
     assert int(status_code) == 201, 'status code not 201'
 
@@ -31,17 +33,19 @@ def test_connect_tariff_apartment(driver, set_up, data):
 @allure.description("Test sending application - office")
 def test_connect_tariff_office(driver, set_up, data):
     """Поиск и отправка заявки на подключение в офис"""
-    base = Base(driver)
+    url = 'https://piter-online.net/'
+    base = Base(driver, url)
+    base.open()
 
     street = data['street']
     house_numbers = data['house_numbers']
     name = data['name']
     number_phone = data['number_phone']
 
-    mp = MainPage(driver)
+    mp = MainPage(driver, url)
     mp.filling_out_the_form_office(street, house_numbers)
 
-    bp = BusinessPage(driver)
+    bp = BusinessPage(driver, url)
     print("Заявка на подключение интернета в офис")
     status_code = bp.send_application_business(name, number_phone)
     assert int(status_code) == 201, 'status code not 201'
@@ -49,28 +53,20 @@ def test_connect_tariff_office(driver, set_up, data):
 
 @allure.description("Test sending application - dacha")
 def test_connect_tariff_dacha(driver, set_up, data):
-    """Поиск и отправка заявки  на подключение на дачу"""
-    base = Base(driver)
+    """Поиск и отправка заявки на подключение на дачу"""
+    url = 'https://piter-online.net/'
+    base = Base(driver, url)
+    base.open()
 
     street = data['street']
     house_numbers = data['house_numbers']
     name = data['name']
     number_phone = data['number_phone']
 
-    mp = MainPage(driver)
+    mp = MainPage(driver, url)
     mp.filling_out_the_form_dacha(street, house_numbers)
 
-    dp = DachaPage(driver)
+    dp = DachaPage(driver, url)
     print("Заявка на подключение интернета на дачу")
     status_code = dp.send_application_dacha(name, number_phone)
     assert int(status_code) == 201, 'status code not 201'
-
-
-# def test_run(driver, set_up, data):
-#     i = 0
-#     while i < 3:
-#         i += 1
-#         print(f"\n__Sending application №{i}__")
-#         test_connect_tariff_apartment(driver, set_up, data)
-#         test_connect_tariff_office(driver, set_up, data)
-#         test_connect_tariff_dacha(driver, set_up, data)

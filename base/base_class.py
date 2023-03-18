@@ -1,158 +1,114 @@
 import datetime
+import allure
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.support.ui import WebDriverWait as wait
 
 
 class Base:
-    def __init__(self, driver):
+    def __init__(self, driver, url):
         self.driver = driver
-        # self.url = url
+        self.url = url
 
+    @allure.step('Open a browser')
+    def open(self):
+        self.driver.get(self.url)
 
+    @allure.step('Get current url')
     def get_current_url(self):
         """Метод возвращающий URL"""
         get_url = self.driver.current_url
         print(f'Current URL: {get_url}')
         return get_url
 
+    @allure.step('Get screenshot')
     def get_screenshot(self):
-        """Создание скриншотов"""
+        """Сделать скриншот"""
         now_date = (datetime.datetime.utcnow() + datetime.timedelta(hours=+3)).strftime("%Y.%m.%d.%H.%M.%S")
         name_screenshot = 'screenshot_' + now_date + '.png'
         self.driver.save_screenshot(
             '.\\screen\\' + name_screenshot)
         print('Сделан скриншот')
 
-    def place_the_cursor_css(self, locator_css):
-        """Навести курсор на элемент CSS"""
-        hoverable = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, locator_css)))
-        ActionChains(self.driver).move_to_element(hoverable).perform()
-
-    def place_the_cursor_xpath(self, locator_xpath):
-        """Навести курсор на элемент XPATH"""
-        hoverable = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, locator_xpath)))
-        ActionChains(self.driver).move_to_element(hoverable).perform()
-
-    def move_to_element(self, x_path_element):
-        """Переместиться к элементу + скролл"""
-        scroll_by = 'window.scrollBy(0, -200);'
-        self.driver.execute_script(scroll_by)
-        action = ActionChains(self.driver)
-        action.move_to_element(x_path_element).perform()
-
+    @allure.step('Finding a substring in a string')
     def find_substring(self, substring, string):
         """Поиск подстроки в строке"""
         if substring in string:
             rez = 0
-            print("Подстрока входит в строку!")
         else:
             rez = -1
-            print('Подстрока не входит в строку!')
         assert rez == 0, 'substring not found'
 
-    def open(self):
-        self.driver.get(self.url)
-
-    def element_is_visible(self, locator, timeout=5):
-        # жди 10 секунд пока локатор не будет представлен
-        return Wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
-
-    def elements_are_visible(self, locator, timeout=5):
-        # жди 10 секунд пока все элементы не будут представлен
-        return Wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
-
-    def element_is_present(self, locator, timeout=5):
-        # найти элемент и взять текст из дом дерева(не обязательно чтобы был виден)
-        return Wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
-
-    def element_are_present(self, locator, timeout=5):
-        # найти элементы и взять текст из дом дерева(не обязательно чтобы был виден)
-        return Wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
-
-    def element_is_not_visible(self, locator, timeout=5):
-        # использование элемента который не виден
-        return Wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
-
-    def element_is_clickable(self, locator, timeout=5):
-        # кликабельный
-        return Wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
-
-    def go_to_element(self, element):
-        # перемещать нас к нужному элементу
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-
-
-    # =======================================================================================
-
-    def element_is_visible(self, locator, timeout=5):
+    @allure.step('Find a visible element')
+    def element_is_visible(self, locator, timeout=20):
         """Ожидание проверки того, что элемент присутствует в DOM страницы и виден."""
+        self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
-    def elements_are_visible(self, locator, timeout=5):
+    @allure.step('Find visible elements')
+    def elements_are_visible(self, locator, timeout=20):
         """Ожидание проверки того, что все элементы присутствуют в DOM страницы и видны."""
         return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
-    def element_is_present(self, locator, timeout=5):
+    @allure.step('Find a present element')
+    def element_is_present(self, locator, timeout=20):
         """Ожидание проверки наличия элемента в DOM страницы."""
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
-    def elements_are_present(self, locator, timeout=5):
+    @allure.step('Find present elements')
+    def elements_are_present(self, locator, timeout=20):
         """Ожидание проверки наличия хотя бы одного элемента на веб-странице."""
         return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
-    def element_is_not_visible(self, locator, timeout=5):
+    @allure.step('Find a not visible element')
+    def element_is_not_visible(self, locator, timeout=20):
         """Ожидание проверки того, что элемент либо невидим, либо отсутствует в DOM."""
         return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
 
-    def element_is_clickable(self, locator, timeout=5):
+    @allure.step('Find clickable elements')
+    def element_is_clickable(self, locator, timeout=20):
         """Ожидание проверки, что элемент видно и включен, поэтому вы можете щелкнуть его."""
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
+    def text_present_in_element(self, locator, text, timeout=20):
+        """Ожидание проверки наличия данного текста в указанном элементе."""
+        return wait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
+
+    @allure.step('Go to specified element')
     def go_to_element(self, element):
+        """Перейти к элементу"""
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
+    @allure.step('Double click')
     def action_double_click(self, element):
+        """Двойной клик"""
         action = ActionChains(self.driver)
         action.double_click(element)
         action.perform()
 
+    @allure.step('Right click')
     def action_right_click(self, element):
+        """Клик правой кнопкой"""
         action = ActionChains(self.driver)
         action.context_click(element)
         action.perform()
 
-    def switch_to(self, page_type):
-        if page_type == 'window':
-            self.driver.switch_to.window(self.driver.window_handles[1])
-        elif page_type == 'alert_text':
-            alert_window = self.driver.switch_to.alert
-            return alert_window.text
-        elif page_type == 'alert_button':
-            alert_window = self.driver.switch_to.alert
-            return alert_window
+    @allure.step('Remove element')
+    def remove_element(self, locator):
+        """Удалить видимый элемент"""
+        element = self.element_is_visible(locator)
+        self.driver.execute_script("arguments[0].remove();", element)
 
-    def action_drag_and_drop_by_offset(self, element, x_coords, y_coords):
-        action = ActionChains(self.driver)
-        action.drag_and_drop_by_offset(element, x_coords, y_coords)
-        action.perform()
-
-    def action_drag_and_drop_by_element(self, what, where):
-        action = ActionChains(self.driver)
-        action.drag_and_drop(what, where)
-        action.perform()
-
-    def action_move_to_element(self, element):
-        action = ActionChains(self.driver)
-        action.move_to_element(element)
-        action.perform()
-
-    # =======================================================================================
+    # @allure.step('Move cursor to element')
+    # def move_to_element(self, x_path_element):
+    #     """Переместиться к элементу + скролл"""
+    #     scroll_by = 'window.scrollBy(0, -200);'
+    #     self.driver.execute_script(scroll_by)
+    #     action = ActionChains(self.driver)
+    #     action.move_to_element(x_path_element).perform()
 
 
+    # ====================================ОЖИДАНИЯ===================================================
     #
     # def wait_page_loaded(self, timeout=60, check_js_complete=True,
     #                      check_page_changes=False, check_images=False,
