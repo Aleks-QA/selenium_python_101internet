@@ -42,7 +42,7 @@ class Base:
     @allure.step('Find a visible element')
     def element_is_visible(self, locator, timeout=20):
         """Ожидание проверки того, что элемент присутствует в DOM страницы и виден."""
-        self.go_to_element(self.element_is_present(locator))
+        # self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     @allure.step('Find visible elements')
@@ -94,9 +94,9 @@ class Base:
         action.perform()
 
     @allure.step('Remove element')
-    def remove_element(self, locator):
+    def remove_element(self, locator, timeout=20):
         """Удалить видимый элемент"""
-        element = self.element_is_visible(locator)
+        element = self.element_is_visible(locator, timeout)
         self.driver.execute_script("arguments[0].remove();", element)
 
     # @allure.step('Move cursor to element')
