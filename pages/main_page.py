@@ -11,9 +11,9 @@ class MainPage(Base):
 
     INPUT_STREET = (By.XPATH, '//div[@class="justify-content-center row"]/div/div[1]//input['
                               '@datatest="main_input_street_home_new"]')
-    PROMPT_LIST = (By.XPATH, '//div[@id="forSelectField"]')
     INPUT_HOUSE_NUMBER = (By.XPATH, '//div[@class="justify-content-center row"]/div/div[2]//input['
                                     '@datatest="main_input_street_home_new"]')
+    PROMPT_LIST = (By.XPATH, '//div[@id="forSelectField"]')
     DROPDOWN_TYPE_CONNECT = (By.XPATH, '//div[@class="justify-content-center row"]//span[text()="Тип подключения"]')
     DROPDOWN_TYPE_CONNECT_APARTMENT = (By.XPATH, '//div[@id="forSelectField"]/div[1]/div/div/div//li[1]')
     DROPDOWN_TYPE_CONNECT_OFFICE = (By.XPATH, '//div[@id="forSelectField"]/div[1]/div/div/div//li[2]')
