@@ -1,0 +1,5 @@
+
+__Start test__
+Заявка на подключение интернета на дачу
+Статус код заявки:  https://piter-online.net/api/orders?type=site101-order-home 201
+__Finish test__
