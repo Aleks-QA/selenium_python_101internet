@@ -1,10 +1,10 @@
-# from pages.apartment_page import ApartmentPage
-# from pages.business_page import BusinessPage
-# from pages.orders_page import OrderPage
-# from pages.dacha_page import DachaPage
-# from pages.main_page import MainPage
-# from base.base_class import Base
-# import allure
+from pages.apartment_page import ApartmentPage
+from pages.business_page import BusinessPage
+from pages.orders_page import OrderPage
+from pages.dacha_page import DachaPage
+from pages.main_page import MainPage
+from base.base_class import Base
+import allure
 
 
 @allure.description("Test suite sending application")
