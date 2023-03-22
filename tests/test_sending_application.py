@@ -46,7 +46,7 @@ class TestSuiteSendApplication:
         bp = BusinessPage(driver, url)
         print("Заявка на подключение интернета в офис")
         status_code = bp.send_application_business(name, number_phone)
-        assert int(status_code) == 202, 'status code not 201'
+        assert int(status_code) == 201, 'status code not 201'
 
     @allure.description("Test sending application - dacha")
     def test_connect_tariff_dacha(self, driver, set_up, data):
