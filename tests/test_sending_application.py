@@ -28,7 +28,7 @@ class TestSuiteSendApplication:
         print("Заявка на подключение интернета в квартиру")
         ap.selection_tariff_apartment()
         status_code = op.send_application_apartment(name, number_phone)
-        assert int(status_code) == 201, 'status code not 201'
+        assert int(status_code) == 200, 'status code not 200'
 
     @allure.description("Test sending application - office")
     def test_connect_tariff_office(self, driver, set_up, data):
@@ -46,7 +46,7 @@ class TestSuiteSendApplication:
         bp = BusinessPage(driver, url)
         print("Заявка на подключение интернета в офис")
         status_code = bp.send_application_business(name, number_phone)
-        assert int(status_code) == 201, 'status code not 201'
+        assert int(status_code) == 200, 'status code not 200'
 
     @allure.description("Test sending application - dacha")
     def test_connect_tariff_dacha(self, driver, set_up, data):
@@ -64,4 +64,4 @@ class TestSuiteSendApplication:
         dp = DachaPage(driver, url)
         print("Заявка на подключение интернета на дачу")
         status_code = dp.send_application_dacha(name, number_phone)
-        assert int(status_code) == 201, 'status code not 201'
+        assert int(status_code) == 200, 'status code not 200'

@@ -22,7 +22,7 @@ class BusinessPage(Base):
             self.element_is_clickable(self.INPUT_NUMBER_PHONE).send_keys(number_phone)
             time.sleep(1)
             self.element_is_clickable(self.BUTTON_SEND_REQUEST).click()
-            request = self.driver.wait_for_request('/api/orders', 30)
+            request = self.driver.wait_for_request('/api_external/sites/webhook', 10)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)
             return status_code
