@@ -5,4 +5,4 @@
 <li>Установить все зависимости: python -m pip install -r requirements.txt</li>
 <li>Отключить антивирус, ему может не понравиться отлов запросов через selenium-wire</li>
 
-<p>P.S. на <a href="https://github.com/Aleks-QA/selenium_python_101internet/tree/old" target="_blank">второй</a> ветке другой способ реализации</p>
+<h5>P.S. на <a href="https://github.com/Aleks-QA/selenium_python_101internet/tree/old" target="_blank">второй</a> ветке другой способ реализации</h5>
