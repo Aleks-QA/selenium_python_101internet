@@ -7,3 +7,4 @@
 <h4>Запуск тестов</h4>
 <li>Установите все требования: python -m pip install -r requirements.txt</li>
 <li>Отключить антивирус, ему может не понравиться отлов запросов через selenium-wire</li>
+<li>Запуск тестов: pytest -s -v</li>
