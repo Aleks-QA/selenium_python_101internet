@@ -57,7 +57,8 @@ class DachaPage(Base):
             print('Нажимаем "Подключиться"')
             self.click_button_connect_dacha()
 
-            request = self.driver.wait_for_request('/api/orders', 30)
+            request = self.driver.wait_for_request('/api_external/sites/webhook', 10)
+            print(request)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)
             Logger.add_end_step(self.driver.current_url, method='send_application_dacha')

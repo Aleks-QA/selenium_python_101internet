@@ -1,3 +1,5 @@
+import time
+
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -54,10 +56,11 @@ class BusinessPage(Base):
             self.input_contact_person(name)
             print('Вводим номер телефона')
             self.input_number_phone(number_phone)
+            time.sleep(1)
             print('Нажимаем "Отправить заявку"')
             self.click_button_send_request()
-
-            request = self.driver.wait_for_request('/api/orders', 30)
+            request = self.driver.wait_for_request('/api_external/sites/webhook', 10)
+            print(request)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)
             Logger.add_end_step(self.driver.current_url, method='send_application_business')

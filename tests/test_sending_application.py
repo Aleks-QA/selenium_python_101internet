@@ -55,12 +55,12 @@ def test_connect_tariff(set_up, data):
             print("Заявка на подключение интернета в квартиру")
             ap.tariff_selection_apartment()
             status_code = op.send_application_apartment(name, number_phone)
-            assert int(status_code) == 201, 'status code not 201'
+            assert int(status_code) == 200, 'status code not 200'
         elif rez == 1:
             print("Заявка на подключение интернета в офис")
             status_code = bp.send_application_business(name, number_phone)
-            assert int(status_code) == 201, 'status code not 201'
+            assert int(status_code) == 200, 'status code not 200'
         elif rez == 2:
             print("Заявка на подключение интернета на дачу")
             status_code = dp.send_application_dacha(name, number_phone)
-            assert int(status_code) == 201, 'status code not 201'
+            assert int(status_code) == 200, 'status code not 200'

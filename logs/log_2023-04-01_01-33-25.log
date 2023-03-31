@@ -1,0 +1,60 @@
+
+-----
+Test: tests/test_sending_application.py::test_connect_tariff (call)
+Start time: 2023-04-01 01:33:27.318826
+Start name method: filling_out_the_form
+
+End time: 2023-04-01 01:33:33.598734
+End name method: filling_out_the_form
+URL: https://piter-online.net/leningradskaya-oblast/business?house_id=4270758
+-----
+
+-----
+Test: tests/test_sending_application.py::test_connect_tariff (call)
+Start time: 2023-04-01 01:33:34.971064
+Start name method: send_application_business
+
+End time: 2023-04-01 01:33:37.004330
+End name method: send_application_business
+URL: https://piter-online.net/leningradskaya-oblast/business?house_id=4270758
+-----
+
+-----
+Test: tests/test_sending_application.py::test_connect_tariff (call)
+Start time: 2023-04-01 01:33:38.491484
+Start name method: send_application_business
+
+End time: 2023-04-01 01:33:39.699564
+End name method: send_application_business
+URL: https://piter-online.net/leningradskaya-oblast/business?house_id=4270758
+-----
+
+-----
+Test: tests/test_sending_application.py::test_connect_tariff (call)
+Start time: 2023-04-01 01:33:40.814308
+Start name method: send_application_business
+
+End time: 2023-04-01 01:33:41.997240
+End name method: send_application_business
+URL: https://piter-online.net/leningradskaya-oblast/business?house_id=4270758
+-----
+
+-----
+Test: tests/test_sending_application.py::test_connect_tariff (call)
+Start time: 2023-04-01 01:33:43.466273
+Start name method: send_application_business
+
+End time: 2023-04-01 01:33:44.674744
+End name method: send_application_business
+URL: https://piter-online.net/leningradskaya-oblast/business?house_id=4270758
+-----
+
+-----
+Test: tests/test_sending_application.py::test_connect_tariff (call)
+Start time: 2023-04-01 01:33:45.942674
+Start name method: send_application_business
+
+End time: 2023-04-01 01:33:47.144871
+End name method: send_application_business
+URL: https://piter-online.net/leningradskaya-oblast/business?house_id=4270758
+-----
