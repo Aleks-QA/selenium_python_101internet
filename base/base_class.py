@@ -39,37 +39,38 @@ class Base:
             rez = -1
         assert rez == 0, 'substring not found'
 
-    @allure.step('Find a visible element')
+    @allure.step('Checking that the element is present in the DOM of the page and is visible.')
     def element_is_visible(self, locator, timeout=20):
         """Ожидание проверки того, что элемент присутствует в DOM страницы и виден."""
         # self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
-    @allure.step('Find visible elements')
+    @allure.step('Checking that all elements are present in the DOM of the page and are visible')
     def elements_are_visible(self, locator, timeout=20):
         """Ожидание проверки того, что все элементы присутствуют в DOM страницы и видны."""
         return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
-    @allure.step('Find a present element')
+    @allure.step('Check if an element exists in the DOM of the page.')
     def element_is_present(self, locator, timeout=20):
         """Ожидание проверки наличия элемента в DOM страницы."""
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
-    @allure.step('Find present elements')
+    @allure.step('Check if an element exists in the DOM of the page.')
     def elements_are_present(self, locator, timeout=20):
         """Ожидание проверки наличия хотя бы одного элемента на веб-странице."""
         return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
-    @allure.step('Find a not visible element')
+    @allure.step('Checks that the element is either invisible or not in the DOM.')
     def element_is_not_visible(self, locator, timeout=20):
         """Ожидание проверки того, что элемент либо невидим, либо отсутствует в DOM."""
         return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
 
-    @allure.step('Find clickable elements')
+    @allure.step('Checks that the item is visible and enabled, so you can click it.')
     def element_is_clickable(self, locator, timeout=20):
         """Ожидание проверки, что элемент видно и включен, поэтому вы можете щелкнуть его."""
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
+    @allure.step('To check the presence of this text in the specified element.')
     def text_present_in_element(self, locator, text, timeout=20):
         """Ожидание проверки наличия данного текста в указанном элементе."""
         return wait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
@@ -93,7 +94,7 @@ class Base:
         action.context_click(element)
         action.perform()
 
-    @allure.step('Remove element')
+    @allure.step('Delete a visible item')
     def remove_element(self, locator, timeout=20):
         """Удалить видимый элемент"""
         element = self.element_is_visible(locator, timeout)
