@@ -7,7 +7,7 @@ from base.base_class import Base
 import allure
 
 
-@allure.description("Test suite sending application")
+@allure.epic("Test suite sending application")
 class TestSuiteSendApplication:
 
     @allure.description("Test sending application - apartment")
