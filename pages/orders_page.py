@@ -19,13 +19,13 @@ class OrderPage(Base):
     def send_application_apartment(self, name, number_phone):
         """Заявка: Подключение интернета в квартиру"""
         with allure.step('Send_application_apartment'):
-            self.element_is_clickable(self.INPUT_NAME).send_keys(name)
+            # self.element_is_clickable(self.INPUT_NAME).send_keys(name)
             self.element_is_clickable(self.INPUT_NUMBER_PHONE).send_keys(number_phone)
             time.sleep(1)
             self.element_is_clickable(self.BUTTON_SUBMIT_YOUR_APPLICATION).click()
             # self.text_present_in_element(self.TEXT_STATUS, 'Ваша заявка на подключение принята в работу.')
 
-            request = self.driver.wait_for_request('/api_external/sites/webhook', 10)
+            request = self.driver.wait_for_request('/api/sites/webhook', 10)
             print(request)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)

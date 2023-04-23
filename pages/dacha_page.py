@@ -23,7 +23,7 @@ class DachaPage(Base):
             self.element_is_clickable(self.INPUT_NUMBER_PHONE_DACHA).send_keys(number_phone)
             time.sleep(1)
             self.element_is_clickable(self.BUTTON_CONNECT_DACHA).click()
-            request = self.driver.wait_for_request('/api_external/sites/webhook', 10)
+            request = self.driver.wait_for_request('/api/sites/webhook', 10)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)
             return status_code
