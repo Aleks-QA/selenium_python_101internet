@@ -12,6 +12,8 @@ def driver():
     options = Options()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     # options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), chrome_options=options)
     driver.maximize_window()
     yield driver
