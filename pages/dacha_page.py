@@ -11,8 +11,8 @@ class DachaPage(Base):
 
     INPUT_NAME_DACHA = (By.XPATH, '//*[@id="root"]/div/div[1]/div[3]//input[@datatest="order_form_input_name"]')
     INPUT_NUMBER_PHONE_DACHA = (By.XPATH, '//*[@id="root"]/div/div[1]/div[3]//input[@datatest="order_form_input_tel"]')
-    BUTTON_CONNECT_DACHA = (
-        By.XPATH, '//*[@id="root"]/div/div[1]/div[3]//div[@data-test="order_form_input_connect_button"]')
+    BUTTON_CONNECT_DACHA = (By.XPATH, '//*[@id="root"]/div/div[1]/div[3]//div['
+                                      '@data-test="order_form_input_connect_button"]')
 
     # METHODS
 
@@ -26,4 +26,5 @@ class DachaPage(Base):
             request = self.driver.wait_for_request('/api/sites/webhook', 10)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)
+
             return status_code

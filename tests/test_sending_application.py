@@ -9,7 +9,6 @@ import allure
 
 @allure.epic("Test suite sending application")
 class TestSuiteSendApplication:
-
     @allure.description("Test sending application - apartment")
     def test_connect_tariff_apartment(self, driver, set_up, data):
         """Поиск и отправка заявки на подключение в квартиру"""

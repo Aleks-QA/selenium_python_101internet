@@ -26,4 +26,5 @@ class BusinessPage(Base):
             request = self.driver.wait_for_request('/api/sites/webhook', 10)
             status_code = request.response.status_code
             print("Статус код заявки: ", request, request.response.status_code)
+
             return status_code

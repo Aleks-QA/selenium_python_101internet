@@ -9,10 +9,6 @@ from base.base_class import Base
 class MainPage(Base):
     # LOCATORS
 
-    INPUT_STREET = (By.XPATH, '//div[@class="justify-content-center row"]/div/div[1]//input['
-                              '@datatest="main_input_street_home_new"]')
-    INPUT_HOUSE_NUMBER = (By.XPATH, '//div[@class="justify-content-center row"]/div/div[2]//input['
-                                    '@datatest="main_input_street_home_new"]')
     PROMPT_LIST = (By.XPATH, '//div[@id="forSelectField"]')
     DROPDOWN_TYPE_CONNECT = (By.XPATH, '//div[@class="justify-content-center row"]//span[text()="Тип подключения"]')
     DROPDOWN_TYPE_CONNECT_APARTMENT = (By.XPATH, '//div[@id="forSelectField"]/div[1]/div/div/div//li[1]')
@@ -21,6 +17,10 @@ class MainPage(Base):
     BUTTON_SHOW_TARIFF = (By.XPATH, '//div[@class="justify-content-center row"]//div[text()="показать тарифы"]')
     BUTTON_CLOSE_INFO_WINDOW = (By.XPATH, '//div[@datatest="close_popup1_from_quiz_input_tel"]/span')
     WINDOW_COOKIES = (By.XPATH, "//span[contains(text(),'cookies')]/../..")
+    INPUT_STREET = (By.XPATH, '//div[@class="justify-content-center row"]/div/div[1]//input['
+                              '@datatest="main_input_street_home_new"]')
+    INPUT_HOUSE_NUMBER = (By.XPATH, '//div[@class="justify-content-center row"]/div/div[2]//input['
+                                    '@datatest="main_input_street_home_new"]')
 
     # METHODS
 
