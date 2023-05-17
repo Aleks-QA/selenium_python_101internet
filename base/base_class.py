@@ -1,5 +1,6 @@
 import datetime
 import allure
+from allure_commons.types import AttachmentType
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
@@ -30,75 +31,149 @@ class Base:
             '.\\screen\\' + name_screenshot)
         print('Сделан скриншот')
 
-    @allure.step('Finding a substring in a string')
-    def find_substring(self, substring, string):
-        """Поиск подстроки в строке"""
-        if substring in string:
-            rez = 0
-        else:
-            rez = -1
-        assert rez == 0, 'substring not found'
 
     @allure.step('Checking that the element is present in the DOM of the page and is visible.')
     def element_is_visible(self, locator, timeout=20):
         """Ожидание проверки того, что элемент присутствует в DOM страницы и виден."""
-        # self.go_to_element(self.element_is_present(locator))
-        return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+        try:
+            # self.go_to_element(self.element_is_present(locator))
+            return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
+
 
     @allure.step('Checking that all elements are present in the DOM of the page and are visible')
     def elements_are_visible(self, locator, timeout=20):
         """Ожидание проверки того, что все элементы присутствуют в DOM страницы и видны."""
-        return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+        try:
+            return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('Check if an element exists in the DOM of the page.')
     def element_is_present(self, locator, timeout=20):
         """Ожидание проверки наличия элемента в DOM страницы."""
-        return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+        try:
+            return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('Check if an element exists in the DOM of the page.')
     def elements_are_present(self, locator, timeout=20):
         """Ожидание проверки наличия хотя бы одного элемента на веб-странице."""
-        return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
+        try:
+            return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
+
+
 
     @allure.step('Checks that the element is either invisible or not in the DOM.')
     def element_is_not_visible(self, locator, timeout=20):
         """Ожидание проверки того, что элемент либо невидим, либо отсутствует в DOM."""
-        return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
+        try:
+            return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('Checks that the item is visible and enabled, so you can click it.')
     def element_is_clickable(self, locator, timeout=20):
         """Ожидание проверки, что элемент видно и включен, поэтому вы можете щелкнуть его."""
-        return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+        try:
+            return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('To check the presence of this text in the specified element.')
     def text_present_in_element(self, locator, text, timeout=20):
         """Ожидание проверки наличия данного текста в указанном элементе."""
-        return wait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
+        try:
+            return wait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('Go to specified element')
     def go_to_element(self, element):
         """Перейти к элементу"""
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        try:
+            self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('Double click')
     def action_double_click(self, element):
         """Двойной клик"""
-        action = ActionChains(self.driver)
-        action.double_click(element)
-        action.perform()
+        try:
+            action = ActionChains(self.driver)
+            action.double_click(element)
+            action.perform()
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('Right click')
     def action_right_click(self, element):
         """Клик правой кнопкой"""
-        action = ActionChains(self.driver)
-        action.context_click(element)
-        action.perform()
+        try:
+            action = ActionChains(self.driver)
+            action.context_click(element)
+            action.perform()
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
 
     @allure.step('Delete a visible item')
     def remove_element(self, locator, timeout=20):
         """Удалить видимый элемент"""
-        element = self.element_is_visible(locator, timeout)
-        self.driver.execute_script("arguments[0].remove();", element)
+        try:
+            element = self.element_is_visible(locator, timeout)
+            self.driver.execute_script("arguments[0].remove();", element)
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
+
+    @allure.step('Wait for request and get status code')
+    def wait_for_request_and_get_status_code(self, pattern_request, timeout=5):
+        """
+            Этот метод будет ждать, пока не увидит запрос, соответствующий шаблону.
+            Возвращает статус код этого запроса
+            Пример pattern_request: "/api/sites/webhook"
+            Требуется библиотека Python: Selenium Wire
+        """
+        try:
+            request = self.driver.wait_for_request(pattern_request, timeout)
+            status_code = request.response.status_code
+            print("Status code: ", request, request.response.status_code)
+            return status_code
+        except:
+            allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
+            raise
+
+    # @allure.step('Finding a substring in a string')
+    # def find_substring(self, substring, string):
+    #     """Поиск подстроки в строке"""
+    #     if substring in string:
+    #         rez = 0
+    #     else:
+    #         rez = -1
+    #     assert rez == 0, 'substring not found'
+
+
+
+    # with allure.step('Шаг 1'):
+    #     try:
+    #         browser.get('https://www.google.ru')
+    #     except:
+    #         allure.attach('error_screen', browser.get_screenshot_as_png(), type=AttachmentType.PNG)
+    #         raise
 
     # @allure.step('Move cursor to element')
     # def move_to_element(self, x_path_element):
@@ -107,7 +182,6 @@ class Base:
     #     self.driver.execute_script(scroll_by)
     #     action = ActionChains(self.driver)
     #     action.move_to_element(x_path_element).perform()
-
 
     # ====================================ОЖИДАНИЯ===================================================
     #
