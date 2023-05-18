@@ -28,7 +28,7 @@ class MainPage(Base):
         """Скрыть окно согласия на использование файлов cookie, если оно присутствует"""
         with allure.step('Close_window_cookies'):
             try:
-                self.remove_element(self.WINDOW_COOKIES, 0.5)
+                self.remove_element(self.WINDOW_COOKIES, 1)
             except TimeoutException:
                 pass
 

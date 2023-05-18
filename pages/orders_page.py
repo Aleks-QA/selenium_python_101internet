@@ -25,5 +25,5 @@ class OrderPage(Base):
             self.element_is_clickable(self.BUTTON_SUBMIT_YOUR_APPLICATION).click()
             # self.text_present_in_element(self.TEXT_STATUS, 'Ваша заявка на подключение принята в работу.')
 
-            status_code = self.wait_for_request_and_get_status_code("/api/orders-------")
+            status_code = self.wait_for_request_and_get_status_code("/api/orders")
             return status_code
