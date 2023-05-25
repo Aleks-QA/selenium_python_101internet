@@ -21,7 +21,8 @@ class OrderPage(Base):
         with allure.step('Send_application_apartment'):
             # self.element_is_clickable(self.INPUT_NAME).send_keys(name)
             self.element_is_clickable(self.INPUT_NUMBER_PHONE).send_keys(number_phone)
-            time.sleep(1)
+            time.sleep(2)
+            self.element_is_visible(self.BUTTON_SUBMIT_YOUR_APPLICATION)
             self.element_is_clickable(self.BUTTON_SUBMIT_YOUR_APPLICATION).click()
             # self.text_present_in_element(self.TEXT_STATUS, 'Ваша заявка на подключение принята в работу.')
 

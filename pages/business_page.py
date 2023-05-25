@@ -20,7 +20,7 @@ class BusinessPage(Base):
         with allure.step('Send_application_business'):
             self.element_is_clickable(self.INPUT_CONTACT_PERSON).send_keys(name)
             self.element_is_clickable(self.INPUT_NUMBER_PHONE).send_keys(number_phone)
-            time.sleep(1)
+            time.sleep(2)
             self.element_is_clickable(self.BUTTON_SEND_REQUEST).click()
 
             status_code = self.wait_for_request_and_get_status_code("/api/orders")

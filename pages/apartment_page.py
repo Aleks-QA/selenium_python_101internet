@@ -1,3 +1,4 @@
+import time
 from random import randint
 import allure
 from selenium.webdriver.common.by import By
@@ -19,5 +20,6 @@ class ApartmentPage(Base):
         """Выбор тарифа по заданному адресу(apartment)"""
         with allure.step('Selection_tariff_apartment'):
             self.element_is_visible(self.BUTTON_CLOSE_INFO_WINDOW_APARTMENT)
+            time.sleep(2)
             self.element_is_clickable(self.BUTTON_CLOSE_INFO_WINDOW_APARTMENT).click()
             self.element_is_clickable(self.BUTTON_RANDOM_CONNECT_TARIFF_APARTMENT).click()

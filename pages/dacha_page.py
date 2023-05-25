@@ -21,7 +21,8 @@ class DachaPage(Base):
         with allure.step('Send_application_dacha'):
             self.element_is_clickable(self.INPUT_NAME_DACHA).send_keys(name)
             self.element_is_clickable(self.INPUT_NUMBER_PHONE_DACHA).send_keys(number_phone)
-            time.sleep(1)
+            time.sleep(2)
+            self.element_is_visible(self.BUTTON_CONNECT_DACHA)
             self.element_is_clickable(self.BUTTON_CONNECT_DACHA).click()
 
             status_code = self.wait_for_request_and_get_status_code("/api/orders")
