@@ -10,7 +10,7 @@ import allure
 @allure.epic("Test suite sending application")
 class TestSuiteSendApplication:
     @allure.description("Test sending application - apartment")
-    def test_connect_tariff_apartment(self, driver, set_up, data):
+    def test_connect_tariff_apartment(self, driver, data):
         """Поиск и отправка заявки на подключение в квартиру"""
         url = 'https://piter-online.net/'
         street = data['street']
@@ -30,7 +30,7 @@ class TestSuiteSendApplication:
         assert int(status_code) == 200, 'status code not 200'
 
     @allure.description("Test sending application - office")
-    def test_connect_tariff_office(self, driver, set_up, data):
+    def test_connect_tariff_office(self, driver, data):
         """Поиск и отправка заявки на подключение в офис"""
         url = 'https://piter-online.net/'
         base = Base(driver, url)
@@ -48,7 +48,7 @@ class TestSuiteSendApplication:
         assert int(status_code) == 200, 'status code not 200'
 
     @allure.description("Test sending application - dacha")
-    def test_connect_tariff_dacha(self, driver, set_up, data):
+    def test_connect_tariff_dacha(self, driver, data):
         """Поиск и отправка заявки на подключение на дачу"""
         url = 'https://piter-online.net/'
         base = Base(driver, url)
