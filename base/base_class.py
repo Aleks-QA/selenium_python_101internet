@@ -1,6 +1,9 @@
 import datetime
+import time
+
 import allure
 from allure_commons.types import AttachmentType
+from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
@@ -29,6 +32,12 @@ class Base:
         name_screenshot = 'screenshot_' + now_date + '.png'
         self.driver.save_screenshot('.\\screen\\' + name_screenshot)
         print('Сделан скриншот')
+
+    @allure.step('Get the number of items')
+    def get_count_elements(self, locator, timeout=20):
+        """Получить количество элементов на странице"""
+        elements = wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
+        return len(elements)
 
     @allure.step('Checking that the element is present in the DOM of the page and is visible.')
     def element_is_visible(self, locator, timeout=20):
@@ -95,10 +104,14 @@ class Base:
             raise
 
     @allure.step('Go to specified element')
-    def go_to_element(self, element):
-        """Перейти к элементу"""
+    def go_to_element(self, locator, timeout=20):
+        """
+        Перейти к элементу
+        Документация к методу scrollIntoView - https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+        """
         try:
-            self.driver.execute_script("arguments[0].scrollIntoView();", element)
+            self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});",
+                                       self.element_is_present(locator, timeout))
         except:
             allure.attach(self.driver.get_screenshot_as_png(), name="error_screen", attachment_type=AttachmentType.PNG)
             raise
