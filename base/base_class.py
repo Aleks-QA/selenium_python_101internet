@@ -106,7 +106,7 @@ class Base:
     @allure.step('Go to specified element')
     def go_to_element(self, locator, timeout=20):
         """
-        Перейти к элементу
+        Перейти к указанному элементу
         Документация к методу scrollIntoView - https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
         """
         try:

@@ -15,7 +15,6 @@ class ApartmentPage(Base):
     INPUT_NUMBER = (By.XPATH, '//input[@datatest="popup_tariff_order_input_tel"]')
     BUTTON_SEND_APPLICATION = (By.XPATH, '//div[@data-test="popup_tariff_order_form_input_connect_button"]')
 
-
     # METHODS
 
     def get_locator_random_tariff(self):
@@ -30,7 +29,7 @@ class ApartmentPage(Base):
         self.element_is_clickable(self.BUTTON_SEND_APPLICATION).click()
 
     def send_application_apartment(self, number):
-        """Выбор тарифа(apartment)"""
+        """Выбор тарифа(в квартиру)"""
         with allure.step('Selection_tariff_apartment'):
             self.element_is_visible(self.BUTTON_CLOSE_INFO_WINDOW_APARTMENT)
             time.sleep(2)

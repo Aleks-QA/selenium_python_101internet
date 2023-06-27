@@ -33,11 +33,10 @@ def driver():
     driver.quit()
     print('__Finish test__')
 
-
 @pytest.fixture
 def data():
     street = 'Тестовая линия'
     house_numbers = '1'
-    name = 'Николай'
+    name = 'Александр'
     number_phone = '1111111111'
     return {"street": street, "house_numbers": house_numbers, "name": name, "number_phone": number_phone}
