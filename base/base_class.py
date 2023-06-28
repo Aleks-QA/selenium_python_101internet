@@ -32,13 +32,13 @@ class Base:
 
     @allure.step('Get the number of items')
     def get_count_elements(self, locator, timeout=20):
-        """Вернет количество элементов на странице"""
+        """Вернет количество элементов на странице( presence_of_all_elements_located )"""
         elements = wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
         return len(elements)
 
     @allure.step('Checking that the element is present in the DOM of the page and is visible.')
     def element_is_visible(self, locator, timeout=20):
-        """Проверка того, что элемент присутствует в DOM страницы и является видимым"""
+        """Проверка, что элемент присутствует в DOM страницы и является видимым( visibility_of_element_located )"""
         try:
             # self.go_to_element(self.element_is_present(locator))
             return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
@@ -48,7 +48,10 @@ class Base:
 
     @allure.step('Checking that all elements are present in the DOM of the page and are visible')
     def elements_are_visible(self, locator, timeout=20):
-        """Проверка того, что все элементы присутствуют в DOM страницы и являются видимыми"""
+        """
+        Проверка, что все элементы присутствуют в DOM страницы
+        и являются видимыми( visibility_of_all_elements_located )
+        """
         try:
             return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
         except:
@@ -57,7 +60,7 @@ class Base:
 
     @allure.step('Check if an element exists in the DOM of the page.')
     def element_is_present(self, locator, timeout=20):
-        """Проверка, существует ли элемент в DOM страницы."""
+        """Проверка, существует ли элемент в DOM страницы( presence_of_element_located )"""
         try:
             return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
         except:
@@ -66,7 +69,7 @@ class Base:
 
     @allure.step('Checking if elements exist in the page DOM')
     def elements_are_present(self, locator, timeout=20):
-        """Проверка, существуют ли элементы в DOM страницы"""
+        """Проверка, существуют ли элементы в DOM страницы( presence_of_all_elements_located )"""
         try:
             return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
         except:
@@ -75,7 +78,7 @@ class Base:
 
     @allure.step('Checks that the element is either invisible or not in the DOM.')
     def element_is_not_visible(self, locator, timeout=20):
-        """Проверяет, что элемент либо невидим, либо отсутствует в DOM."""
+        """Проверяет, что элемент либо невидим, либо отсутствует в DOM( invisibility_of_element_located )"""
         try:
             return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
         except:
@@ -84,7 +87,7 @@ class Base:
 
     @allure.step('Checks that the item is visible and enabled, so you can click it.')
     def element_is_clickable(self, locator, timeout=20):
-        """Проверяет, что элемент виден и включен, поэтому его можно щелкнуть."""
+        """Проверяет, что элемент виден и включен, поэтому его можно щелкнуть( element_to_be_clickable )"""
         try:
             return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
         except:
@@ -93,7 +96,11 @@ class Base:
 
     @allure.step('Checks if this text is present in the specified element.')
     def text_present_in_element(self, locator, text, timeout=20):
-        """Проверяет, присутствует ли данный текст в указанном элементе."""
+        """
+        Проверяет, присутствует ли данный текст в указанном элементе.
+        Если текст присутствует, код продолжит работу,
+        Если не дождется, вернет ошибку
+        """
         try:
             return wait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
         except:
