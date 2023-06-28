@@ -26,7 +26,7 @@ tests/ - содержит тесты, описанные бизнес-логик
 class TestExample:
     """
     tests/ - СОДЕРЖИТ ТЕСТЫ, ОПИСАННЫЕ БИЗНЕС-ЛОГИКОЙ ТЕСТ-КЕЙСОВ
-    Шаги:
+    ШАГИ:
     1 - Пользователь открывает браузер
     2 - Пользователь нажимает на кнопку
     3 - Пользователь ожидает определенное сообщение
@@ -44,7 +44,7 @@ class TestExample:
         assert message == "You have done a dynamic click", 'Invalid message after pressing the button'
 
 
-# --------------------------------------  пример base_class.py  ------------------------------------------------------
+# --------------------------------------  пример base/base_class.py  -------------------------------------------------
 
 class BaseExample:
     """
@@ -60,15 +60,15 @@ class BaseExample:
         self.driver.get(self.url)
 
     def element_is_clickable(self, locator, timeout=20):
-        """Проверяет, что элемент виден и включен, поэтому его можно щелкнуть(element_to_be_clickable)"""
+        """Проверяет, что элемент виден и включен, поэтому его можно щелкнуть"""
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     def element_is_visible(self, locator, timeout=20):
-        """Проверка того, что элемент присутствует в DOM страницы и является видимым(visibility_of_element_located)"""
+        """Проверка того, что элемент присутствует в DOM страницы и является видимым"""
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
 
-# --------------------------------------   пример main_page.py  ------------------------------------------------------
+# --------------------------------------   пример pages/main_page.py  ------------------------------------------------
 
 class PageExample(BaseExample):  # наследуем базовые методы
     """
@@ -80,21 +80,17 @@ class PageExample(BaseExample):  # наследуем базовые метод�
     TEXT_MESSAGE = (By.XPATH, '//p[@id="dynamicClickMessage"]')
 
     # methods
+    """СРАВНЕНИЕ ОБЪЕМА КОДА БЕЗ УЧЕТА ПОДКЛЮЧЕНИЯ ОТЧЕТОВ"""
     def click_button(self):
-        """
-        Работа с элементами используя методы из базового класса
-        """
+        """  Работа с элементами используя методы из базового класса  """
         self.element_is_clickable(self.BUTTON, 20).click()
         message = self.element_is_visible(self.TEXT_MESSAGE, 20).text
         return message
 
     def click_button_old(self):
-        """
-        Работа с элементами если их нет в базовом классе
-        И сравнение объема кода без учета подключения отчетов
-        """
-        WebDriverWait(self.driver, timeout=20).until(EC.element_to_be_clickable(self.BUTTON)).click()
-        message = WebDriverWait(self.driver, timeout=20).until(EC.visibility_of_element_located(self.TEXT_MESSAGE)).text
+        """  Работа с элементами если их нет в базовом классе  """
+        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.BUTTON)).click()
+        message = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.TEXT_MESSAGE)).text
         return message
 
 
@@ -111,4 +107,3 @@ def driver_example():
     driver_example_x.maximize_window()
     yield driver_example_x
     driver_example_x.quit()
-
