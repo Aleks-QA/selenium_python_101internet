@@ -1,9 +1,6 @@
 import datetime
-import time
-
 import allure
 from allure_commons.types import AttachmentType
-from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
@@ -35,7 +32,7 @@ class Base:
 
     @allure.step('Get the number of items')
     def get_count_elements(self, locator, timeout=20):
-        """Получить количество элементов на странице"""
+        """Вернет количество элементов на странице"""
         elements = wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
         return len(elements)
 
