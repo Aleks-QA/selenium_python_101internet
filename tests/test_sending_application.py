@@ -14,7 +14,7 @@ class TestSuiteSendApplication:
         url = 'https://piter-online.net/'
         street = data['street']
         house_numbers = data['house_numbers']
-        name = data['name']
+        # name = data['name']
         number_phone = data['number_phone']
         base = Base(driver, url)
         base.open()
