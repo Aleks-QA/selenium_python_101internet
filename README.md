@@ -15,5 +15,5 @@
 <li>Запуск тестов: python -s -m pytest --alluredir=test_results/</li>
 </ol>
 
-<h6>P.S. Добавлено небольшое описание работы проекта в project_description.py</h6>
+<h6>P.S. Добавлено небольшое описание работы проекта в <a href="https://github.com/Aleks-QA/selenium_python_101internet/blob/main/project_description.py" target="_blank">project_description.py</a></h6>
 <h6>P.S.S. на <a href="https://github.com/Aleks-QA/selenium_python_101internet/tree/old" target="_blank">второй</a> ветке другой способ реализации</h6>
