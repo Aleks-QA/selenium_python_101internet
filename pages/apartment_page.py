@@ -20,7 +20,7 @@ class ApartmentPage(Base):
     def get_locator_random_tariff(self):
         """Получение локатора случайного тарифа"""
         count = self.get_count_elements(self.LIST_TARIFF)  # метод получающий количество элементов
-        locator = (By.XPATH, f'//div[{randint(1, count)}]/div/div/div/div/div/div/a[contains(text(),"Подключить")]')
+        locator = (By.XPATH, f'//*[@id="root"]/div/div[1]/div[4]/div[4]/div[1]/div/div[2]/div[{randint(1, count)}]/div[6]/div//a/span')
         return locator
 
     def fill_pop_up_window(self, number):
